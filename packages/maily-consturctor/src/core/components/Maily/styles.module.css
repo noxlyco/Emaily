@@ -1,0 +1,44 @@
+.maily--wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.maily--header {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 6px;
+  border-bottom: 1px solid lightgray;
+}
+
+.maily--title {
+  margin: 0;
+}
+
+.maily--contentPart {
+  display: flex;
+  flex-direction: row;
+  height: 100%
+}
+
+.maily--leftSidebar {
+  width: 20vw;
+  border-right: 1px solid lightgray;
+}
+
+.maily--root {
+  width: 60vw;
+}
+
+.maily--rightSidebar {
+  width: 20vw;
+  border-left: 1px solid lightgray;
+}
+
+.maily--footer {
+  height: 50px;
+  border-top: 1px solid lightgray;
+}
