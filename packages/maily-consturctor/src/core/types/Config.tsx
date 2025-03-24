@@ -1,4 +1,11 @@
+import { ComponentType } from "./Component";
+
 export type ConfigType = {
-  // TODO: Remove any
-  components: Record<string, any>
-}
+  components: Record<string, ComponentType>;
+  structure: {
+    html?: string;
+    json?: Record<string, ComponentType>;
+  };
+  selectedComponent: ComponentType & { id: string };
+};
+

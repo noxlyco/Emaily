@@ -1,0 +1,23 @@
+.content--wrapper {
+  display: flex;
+  width: 100%;
+  user-select: none;
+  cursor: pointer;
+}
+
+.content--wrapper:hover {
+  border: 1px dashed dodgerblue;
+  height: fit-content;
+  width: 100%;
+  background-color: rgba(30, 143, 255, 0.25);
+}
+
+.content--wrapper--isSelected {
+  display: flex;
+  width: 100%;
+  border: 1px solid dodgerblue;
+  height: fit-content;
+  width: 100%;
+  background-color: rgba(30, 143, 255, 0.25);
+}
+
