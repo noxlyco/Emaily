@@ -9,5 +9,8 @@
     "@types/node": "^22.13.4",
     "lerna": "^8.1.9",
     "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace=@noxlyco/demo"
   }
 }
