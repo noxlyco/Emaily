@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextareaField } from "../../../../../types/Fields";
+import { TextareaField } from "../../../types/Fields";
 
 type TextareaInputProps = TextareaField & {
   onChange: (value: string) => void;

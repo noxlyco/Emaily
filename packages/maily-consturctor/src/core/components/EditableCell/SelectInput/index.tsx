@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SelectField } from "../../../../../types/Fields";
+import { SelectField } from "../../../types/Fields";
 
 type SelectInputProps = SelectField & {
   onChange: (value: string) => void;

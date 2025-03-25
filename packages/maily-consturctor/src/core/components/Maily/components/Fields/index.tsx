@@ -1,7 +1,7 @@
 import { createClassNameFactory } from "../../../../../utils/createClassNameFactory";
+import { EditableCell } from "../../../EditableCell";
 import { useMailyContext } from "../../context";
 import styles from "./styles.module.css";
-import { EditableCell } from "../EditableCell";
 
 const generateClassName = createClassNameFactory("fields", styles);
 

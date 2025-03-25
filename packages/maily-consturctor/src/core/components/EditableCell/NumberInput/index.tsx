@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NumberField } from "../../../../../types/Fields";
+import { NumberField } from "../../../types/Fields";
 
 type NumberInputProps = NumberField & {
   onChange: (value: number) => void;

@@ -6,6 +6,6 @@ export type ConfigType = {
     html?: string;
     json?: Record<string, ComponentType>;
   };
-  selectedComponent: ComponentType & { id: string };
+  selectedComponent: (ComponentType & { id: string; label: string }) | null;
 };
 

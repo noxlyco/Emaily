@@ -1,6 +1,8 @@
+import { Fragment } from "react/jsx-runtime";
 import { createClassNameFactory } from "../../../../../utils/createClassNameFactory";
 import { ComponentType } from "../../../../types/Component";
 import { useMailyContext } from "../../context";
+import { ActionMenu } from "../ActionMenu";
 import styles from "./styles.module.css";
 
 const generateClassName = createClassNameFactory("content", styles);
@@ -26,25 +28,33 @@ export const Content = ({
   };
 
   const output = Object.fromEntries(
-    Object.entries(component.fields).map(([key, value]) => [
+    Object.entries(component.fields ?? {}).map(([key, value]) => [
       key,
-      value.value ?? value.defaultValue,
+      value || value?.defaultValue,
     ])
   );
 
-  console.log(output, component);
+  console.log(selectedComponent);
   return (
-    <span
-      className={generateClassName("wrapper", { isSelected })}
-      onClick={handleSelectContent}
-    >
-      <div
-        className={generateClassName("item")}
-        dangerouslySetInnerHTML={{
-          __html: component.render(output) || "",
-        }}
-      />
-    </span>
+    <Fragment>
+      <span
+        className={generateClassName("wrapper", { isSelected })}
+        onClick={handleSelectContent}
+      >
+        {isSelected && (
+          <ActionMenu
+            label={selectedComponent.label}
+            id={selectedComponent.id}
+          />
+        )}
+        <div
+          className={generateClassName("item")}
+          dangerouslySetInnerHTML={{
+            __html: component.render(output) || "",
+          }}
+        />
+      </span>
+    </Fragment>
   );
 };
 

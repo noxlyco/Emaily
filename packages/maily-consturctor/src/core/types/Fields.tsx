@@ -27,19 +27,9 @@ export type SelectField = BaseFieldType & {
   options: FieldOptionType[];
 };
 
-export type RadioField = BaseFieldType & {
-  type: "radio";
-  options: FieldOptionType[];
-};
-
 export type ObjectField = BaseFieldType;
 
 export type ArrayField = BaseFieldType;
 
-export type FieldType =
-  | TextField
-  | TextareaField
-  | NumberField
-  | SelectField
-  | RadioField;
+export type FieldType = TextField | TextareaField | NumberField | SelectField;
 

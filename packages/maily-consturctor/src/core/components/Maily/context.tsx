@@ -14,11 +14,11 @@ type MailyAction =
     }
   | {
       type: "REMOVE_COMPONENT";
-      payload?: string;
+      payload: string;
     }
   | {
       type: "SET_SELECTED_COMPONENT";
-      payload: ComponentType & { id: string };
+      payload: (ComponentType & { id: string }) | null;
     }
   | {
       type: "UPDATE_COMPONENT";
@@ -32,11 +32,27 @@ const mailyReducer = (state: AppState, action: MailyAction): AppState => {
 
   switch (action.type) {
     case "SET_SELECTED_COMPONENT": {
+      if (!action.payload) {
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            selectedComponent: null,
+          },
+        };
+      }
+
+      const { id } = action.payload;
+      const name = parseRandomId(id);
+
       return {
         ...state,
         data: {
           ...state.data,
-          selectedComponent: action.payload,
+          selectedComponent: {
+            label: name,
+            ...action.payload,
+          },
         },
       };
     }
@@ -71,12 +87,20 @@ const mailyReducer = (state: AppState, action: MailyAction): AppState => {
           structure: { json = {} },
         },
       } = state;
-      console.log(json);
-      const [componentId, componentValue] = Object.entries(json).find(
-        ([key]) => key === id
-      );
+
+      const foundComponent = Object.entries(json).find(([key]) => key === id);
+
+      if (!foundComponent) {
+        return state;
+      }
+
+      const [componentId, componentValue] = foundComponent;
 
       const { fields } = componentValue;
+
+      if (!fields) {
+        return state;
+      }
 
       const updatedField = { ...fields[fieldKey], value: value };
 
@@ -100,8 +124,22 @@ const mailyReducer = (state: AppState, action: MailyAction): AppState => {
         },
       };
     }
-    case "REMOVE_COMPONENT":
-      return state;
+    case "REMOVE_COMPONENT": {
+      const newJsonEntries = Object.entries(
+        state.data.structure?.json || {}
+      ).filter(([key]) => key !== action.payload);
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          structure: {
+            ...state.data.structure,
+            json: Object.fromEntries(newJsonEntries),
+          },
+        },
+      };
+    }
     default:
       return state;
   }

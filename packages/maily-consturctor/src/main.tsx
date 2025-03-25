@@ -15,9 +15,6 @@ const components = {
       text: {
         type: "text",
       },
-      radio: {
-        type: "radio",
-      },
       number: {
         type: "number",
         defaultValue: 5,

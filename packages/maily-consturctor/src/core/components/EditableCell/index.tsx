@@ -1,14 +1,13 @@
-import { createClassNameFactory } from "../../../../../utils/createClassNameFactory";
-import { FieldType } from "../../../../types/Fields";
 import { NumberInput } from "./NumberInput";
-import { RadioInput } from "./RadioInput";
 import { SelectInput } from "./SelectInput";
 import { TextareaInput } from "./TextareaInput";
 import { TextInput } from "./TextInput";
+import { Fragment } from "react/jsx-runtime";
+import { useMailyContext } from "../Maily/context";
+import { FieldType } from "../../types/Fields";
+import { createClassNameFactory } from "../../../utils/createClassNameFactory";
 
 import styles from "./styles.module.css";
-import { Fragment } from "react/jsx-runtime";
-import { useMailyContext } from "../../context";
 
 const generateClassName = createClassNameFactory("editable-cell", styles);
 
@@ -44,9 +43,6 @@ export const EditableCell = ({
       }
       case "number": {
         return <NumberInput {...field} onChange={onChange} />;
-      }
-      case "radio": {
-        return <RadioInput />;
       }
       case "select": {
         return <SelectInput {...field} onChange={onChange} />;
