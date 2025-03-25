@@ -1,10 +1,32 @@
-import { createClassNameFactory } from "../../../../../../utils/createClassNameFactory";
+import { useState } from "react";
+import { NumberField } from "../../../../../types/Fields";
 
-import styles from "./styles.module.css";
+type NumberInputProps = NumberField & {
+  onChange: (value: number) => void;
+};
 
-const generateClassName = createClassNameFactory("number-input", styles);
+export const NumberInput = ({
+  min,
+  max,
+  defaultValue = 0,
+  onChange,
+}: NumberInputProps) => {
+  const [value, setValue] = useState(defaultValue || 0);
 
-export const NumberInput = ({ label = "" }: { label?: string }) => {
-  return <></>;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    setValue(value);
+    onChange(value);
+  };
+
+  return (
+    <input
+      type="number"
+      value={Number(value)}
+      min={min}
+      max={max}
+      onChange={handleChange}
+    />
+  );
 };
 

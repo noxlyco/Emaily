@@ -19,6 +19,10 @@ type MailyAction =
   | {
       type: "SET_SELECTED_COMPONENT";
       payload: ComponentType & { id: string };
+    }
+  | {
+      type: "UPDATE_COMPONENT";
+      payload: { id: string; fieldKey: string; value: string };
     };
 
 const mailyReducer = (state: AppState, action: MailyAction): AppState => {
@@ -43,7 +47,7 @@ const mailyReducer = (state: AppState, action: MailyAction): AppState => {
 
       const newJsonEntries = Object.entries(state.data.structure?.json || {});
       newJsonEntries.splice(index, 0, [id, component]);
-
+      console.log(state);
       return {
         ...state,
         data: {
@@ -51,6 +55,47 @@ const mailyReducer = (state: AppState, action: MailyAction): AppState => {
           structure: {
             ...state.data.structure,
             json: Object.fromEntries(newJsonEntries),
+          },
+        },
+      };
+    }
+    case "UPDATE_COMPONENT": {
+      const { id, fieldKey, value } = action.payload;
+
+      console.log(id, fieldKey, value);
+
+      console.log(state.data.structure.json);
+
+      const {
+        data: {
+          structure: { json = {} },
+        },
+      } = state;
+      console.log(json);
+      const [componentId, componentValue] = Object.entries(json).find(
+        ([key]) => key === id
+      );
+
+      const { fields } = componentValue;
+
+      const updatedField = { ...fields[fieldKey], value: value };
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          structure: {
+            ...state.data.structure,
+            json: {
+              ...state.data.structure.json,
+              [componentId]: {
+                ...componentValue,
+                fields: {
+                  ...fields,
+                  [fieldKey]: updatedField,
+                },
+              },
+            },
           },
         },
       };

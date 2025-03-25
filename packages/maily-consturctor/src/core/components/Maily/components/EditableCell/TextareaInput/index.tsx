@@ -1,10 +1,22 @@
-import { createClassNameFactory } from "../../../../../../utils/createClassNameFactory";
+import { useState } from "react";
+import { TextareaField } from "../../../../../types/Fields";
 
-import styles from "./styles.module.css";
+type TextareaInputProps = TextareaField & {
+  onChange: (value: string) => void;
+};
 
-const generateClassName = createClassNameFactory("textarea-input", styles);
+export const TextareaInput = ({
+  defaultValue = "",
+  onChange,
+}: TextareaInputProps) => {
+  const [value, setValue] = useState(defaultValue || "");
 
-export const TextareaInput = () => {
-  return <></>;
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    setValue(value);
+    onChange(value);
+  };
+
+  return <textarea value={String(value)} onChange={handleChange} />;
 };
 

@@ -1,17 +1,19 @@
-import { createClassNameFactory } from "../../../../../../utils/createClassNameFactory";
+import { useState } from "react";
+import { TextField } from "../../../../../types/Fields";
 
-import styles from "./styles.module.css";
+type TextInputProps = TextField & {
+  onChange: (value: string) => void;
+};
 
-const generateClassName = createClassNameFactory("text-input", styles);
+export const TextInput = ({ defaultValue = "", onChange }: TextInputProps) => {
+  const [value, setValue] = useState(defaultValue || "");
 
-export const TextInput = ({ label = "" }: { label?: string }) => {
-  return (
-    <>
-      {label && <label className={generateClassName("label")}>{label}</label>}
-      <div className={generateClassName()}>
-        <input type="text" />
-      </div>
-    </>
-  );
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setValue(value);
+    onChange(value);
+  };
+
+  return <input type="text" value={String(value)} onChange={handleChange} />;
 };
 

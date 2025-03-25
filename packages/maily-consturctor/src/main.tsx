@@ -5,18 +5,30 @@ import "./main.css";
 
 const components = {
   hero: {
-    render: ({ text = "" }) => `<p>Component ${text}</p>`,
+    render: ({ text = "", textarea = "", number = 1, select }) =>
+      `<p>Component ${text}</p><br /><p> ${textarea}</p><br /><p> ${number}</p><br /><p> ${select}</p>`,
     fields: {
+      textarea: {
+        type: "textarea",
+        defaultValue: "Textarea",
+      },
       text: {
         type: "text",
       },
-    },
-  },
-  hero1: {
-    render: () => `<p>Component #2</p>`,
-    fields: {
-      text: {
-        type: "text",
+      radio: {
+        type: "radio",
+      },
+      number: {
+        type: "number",
+        defaultValue: 5,
+      },
+      select: {
+        type: "select",
+        defaultValue: "Option 1",
+        options: [
+          { label: "Option 1", value: "Option 1" },
+          { label: "Option 2", value: "Option 2" },
+        ],
       },
     },
   },

@@ -25,6 +25,14 @@ export const Content = ({
     dispatch({ type: "SET_SELECTED_COMPONENT", payload: { id, ...component } });
   };
 
+  const output = Object.fromEntries(
+    Object.entries(component.fields).map(([key, value]) => [
+      key,
+      value.value ?? value.defaultValue,
+    ])
+  );
+
+  console.log(output, component);
   return (
     <span
       className={generateClassName("wrapper", { isSelected })}
@@ -33,7 +41,7 @@ export const Content = ({
       <div
         className={generateClassName("item")}
         dangerouslySetInnerHTML={{
-          __html: component.render({ text: "text" }) || "",
+          __html: component.render(output) || "",
         }}
       />
     </span>

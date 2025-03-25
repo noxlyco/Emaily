@@ -1,4 +1,4 @@
-.text-input--label {
+.editable-cell--label {
   -webkit-user-select: none;
   user-select: none;
   padding: 0 16px;
@@ -7,7 +7,9 @@
   font-weight: bold;
 }
 
-.text-input input {
+.editable-cell--wrapper input,
+.editable-cell--wrapper textarea,
+.editable-cell--wrapper select {
   align-items: center;
   appearance: none;
   width: 100%;
@@ -40,13 +42,9 @@
   justify-content: flex-start;
 }
 
-.text-input:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
-    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.text-input input:focus {
+.editable-cell--wrapper input:focus,
+.editable-cell--wrapper textarea:focus,
+.editable-cell--wrapper select:focus {
   box-shadow: #d6d6e7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
     rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #d6d6e7 0 -3px 0 inset;
 }

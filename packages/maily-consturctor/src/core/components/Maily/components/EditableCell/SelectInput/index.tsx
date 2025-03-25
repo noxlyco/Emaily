@@ -1,10 +1,31 @@
-import { createClassNameFactory } from "../../../../../../utils/createClassNameFactory";
+import { useState } from "react";
+import { SelectField } from "../../../../../types/Fields";
 
-import styles from "./styles.module.css";
+type SelectInputProps = SelectField & {
+  onChange: (value: string) => void;
+};
 
-const generateClassName = createClassNameFactory("select-input", styles);
+export const SelectInput = ({
+  options = [],
+  defaultValue = "",
+  onChange,
+}: SelectInputProps) => {
+  const [value, setValue] = useState(defaultValue);
 
-export const SelectInput = () => {
-  return <></>;
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setValue(value);
+    onChange(value);
+  };
+
+  return (
+    <select value={String(value)} onChange={handleChange}>
+      {options.map(({ label, value }) => (
+        <option key={String(value)} value={String(value)}>
+          {label}
+        </option>
+      ))}
+    </select>
+  );
 };
 

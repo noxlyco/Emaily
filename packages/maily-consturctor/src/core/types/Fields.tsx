@@ -5,6 +5,7 @@ type FieldOptionType = {
 
 export type BaseFieldType = {
   label?: string;
+  defaultValue?: string | number | boolean;
 };
 
 export type TextField = BaseFieldType & {
